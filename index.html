@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LIBERO-Ego</title>
+<meta name="description" content="LIBERO-Ego: a benchmark for robot learning from in-scene egocentric human demonstrations. 2,000 VR demonstrations of 40 LIBERO tasks, each certified by replay on LIBERO's robot.">
+<meta property="og:title" content="LIBERO-Ego">
+<meta property="og:description" content="A benchmark for robot learning from in-scene egocentric human demonstrations.">
+<meta property="og:image" content="static/img/concept_teaser.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e130f'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%23a8dc2f'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700|Noto+Sans:400,400i,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="static/css/site.css">
+</head>
+<body>
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="#top">LIBERO-<span>Ego</span></a>
+    <nav class="section-nav" aria-label="Sections">
+      <a href="#video">Video</a>
+      <a href="#overview">Overview</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#certification">Certification</a>
+      <a href="#method">Method</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#findings">Findings</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <video class="hero-video" id="hero-video" src="static/videos/hero.mp4" poster="static/videos/hero.jpg" muted loop playsinline autoplay preload="auto"></video>
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <h1 class="hero-title">LIBERO-Ego</h1>
+    <p class="hero-subtitle">A Benchmark for Robot Learning from<br>In-Scene Egocentric Human Demonstrations</p>
+  </div>
+  <button class="play-toggle" id="hero-toggle" type="button" aria-label="Pause background video"><i class="fa-solid fa-pause"></i></button>
+</section>
+
+<section class="pub-header">
+  <div class="container narrow center">
+    <h1 class="pub-title"><span class="accent-ink">LIBERO-Ego</span>: A Benchmark for Robot Learning from In-Scene Egocentric Human Demonstrations</h1>
+    <p class="pub-authors">Anonymous Authors</p>
+    <div class="pub-links">
+      <a class="pill" href="static/paper/LIBERO-Ego.pdf"><i class="fa-solid fa-file-pdf"></i>Paper</a>
+      <a class="pill" href="https://github.com/LIBERO-EGO/LIBERO-Ego"><i class="fa-brands fa-github"></i>Code</a>
+      <a class="pill" href="https://huggingface.co/datasets/LIBERO-Ego/LIBERO-Ego"><i class="fa-solid fa-database"></i>Dataset</a>
+      <span class="pill is-soon" aria-disabled="true"><i class="fa-solid fa-book"></i>Documentation<span class="soon">Coming soon</span></span>
+    </div>
+  </div>
+</section>
+
+<section class="section tint" id="video">
+  <div class="container">
+    <h2 class="section-title">Video</h2>
+    <figure class="paper-figure overview-film">
+      <video id="overview-video" src="static/videos/overview.mp4" poster="static/videos/overview.jpg" controls playsinline preload="metadata"></video>
+      <figcaption>The benchmark, our method and the main results in four and a half minutes.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section light" id="overview">
+  <div class="container narrow">
+    <h2 class="section-title">Overview</h2>
+    <p class="tagline">LIBERO-Ego is a benchmark for learning robot manipulation from egocentric human demonstrations.</p>
+    <div class="prose">
+      <p>Egocentric human demonstrations are cheap to record at scale, but they differ from the teleoperated data robots usually learn from: the trajectories are freer, the camera moves with the head, the image shows a human arm, and there are neither joint readings nor a wrist camera. They therefore mostly pre-train robot policies: large egocentric corpora and robot video pre-train a policy, and in-domain teleoperation of the target tasks aligns it.</p>
+    </div>
+    <figure class="paper-figure inline-figure">
+      <img src="static/img/concept_pyramid.jpg" alt="Two pyramids of training data. Common practice: large-scale robot video at the base, egocentric corpora in the middle, in-domain robot teleoperation at the top. LIBERO-Ego: in-domain human demonstrations at the top, with no egocentric or robot-video corpus below." loading="lazy" width="1800" height="840">
+      <figcaption><b>In-domain human demonstrations.</b> (a) Commonly, egocentric corpora and robot video pre-train a policy that in-domain teleoperation then aligns. (b) LIBERO-Ego asks whether in-domain egocentric demonstrations, recorded in the scenes the robot is tested in, can take that teleoperation's place.</figcaption>
+    </figure>
+    <div class="prose">
+      <p>Works that train robots on egocentric demonstrations of the target tasks, with no additional teleoperation, each use their own tasks, data and protocol, so their results cannot be compared.</p>
+      <p>LIBERO-Ego records 2,000 in-domain egocentric demonstrations in virtual reality inside the original scenes of 40 LIBERO tasks: a person in a headset performs each task with bare, tracked hands, while the simulator provides appearance and physics. Every demonstration is certified by replay on LIBERO's robot and stored with its full simulator state, so the same trajectory can be rendered as a person's recording or as a robot's, and LIBERO's own teleoperated demonstrations of the same tasks are the reference. Policies are evaluated in closed loop on LIBERO's unmodified robot, tasks and success predicates.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><b>2,000</b><span>demonstrations</span></div>
+      <div class="stat"><b>40</b><span>tasks, 50 each</span></div>
+      <div class="stat"><b>4</b><span>LIBERO suites</span></div>
+      <div class="stat"><b>753k</b><span>frames at 62.5 Hz</span></div>
+      <div class="stat"><b>100%</b><span>certified by robot replay</span></div>
+    </div>
+    <figure class="paper-figure">
+      <img src="static/img/concept_teaser.jpg" alt="Overview of LIBERO-Ego: in-scene egocentric VR demonstrations, certified by robot replay, retargeted with a 6-DoF mapping, and rendered as four kinds of training data." width="1800" height="971">
+      <figcaption><b>Overview.</b> Demonstrations are recorded in VR inside LIBERO's scenes, certified by replay on LIBERO's robot through a 6-DoF hand-to-gripper mapping, and rendered as four kinds of training data.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section dark" id="gallery">
+  <div class="container">
+    <div class="heading-row">
+      <h2 class="section-title">Demonstration Gallery</h2>
+      <button class="play-toggle inline" id="gallery-toggle" type="button" aria-label="Pause gallery videos"><i class="fa-solid fa-pause"></i></button>
+    </div>
+    <p class="quote">One demonstration of every task, re-rendered from its stored simulator state and the operator's recorded head pose. Switch to the robot to see LIBERO's robot replay the same demonstration.</p>
+    <div class="segmented" role="group" aria-label="Rendering">
+      <button type="button" class="is-active" data-mode="human"><i class="fa-solid fa-hand"></i>Egocentric human</button>
+      <button type="button" data-mode="robot"><i class="fa-solid fa-robot"></i>Robot replay</button>
+    </div>
+    <div class="suite-grid" id="suite-grid"></div>
+    <div class="suite-detail" id="suite-detail">
+      <h3 class="detail-title" id="detail-title"></h3>
+      <div class="carousel">
+        <button class="car-btn prev" type="button" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="car-track" id="car-track"></div>
+        <button class="car-btn next" type="button" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="certification">
+  <div class="container">
+    <h2 class="section-title">Certified by Robot Replay</h2>
+    <p class="quote">A demonstration is released only if LIBERO's robot completes the task when it replays the demonstration from its recorded initial state through one fixed 6-DoF hand-to-gripper mapping. The replay is deterministic, and all 2,000 pass.</p>
+    <div class="feature">
+      <div class="feature-head">
+        <span class="feature-suite" id="feature-suite"></span>
+        <h4 class="feature-task" id="feature-task"></h4>
+      </div>
+      <div class="feature-stage">
+        <figure><video id="feature-human" muted loop playsinline preload="none"></video><figcaption>Egocentric demonstration</figcaption></figure>
+        <figure><video id="feature-robot" muted loop playsinline preload="none"></video><figcaption>Robot replay, LIBERO's agentview</figcaption></figure>
+      </div>
+      <div class="strip">
+        <button class="strip-btn prev" type="button" aria-label="Scroll left"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="strip-track" id="strip-track"></div>
+        <button class="strip-btn next" type="button" aria-label="Scroll right"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section light" id="method">
+  <div class="container">
+    <h2 class="section-title">Method</h2>
+    <p class="quote">The operator's tracked head and bare hands drive a virtual hand in LIBERO's scene. A fixed 6-DoF mapping turns the hand into gripper targets, LIBERO's robot replays them, and the demonstration is kept with its full simulator state, from which it can be rendered as human or as robot data.</p>
+    <div class="figure-stack">
+      <figure class="paper-figure">
+        <img src="static/img/concept_collection.jpg" alt="Collection: the operator's tracked head and bare hands drive a virtual hand in LIBERO's scene; the hand is retargeted to a 6-DoF gripper; LIBERO's robot replays the demonstration; the full simulator state is stored." loading="lazy" width="1800" height="764">
+        <figcaption><b>Collection in the original scenes.</b> The hand is retargeted to a 6-DoF gripper, LIBERO's robot replays the demonstration, and the demonstration is released only on success, with its full simulator state.</figcaption>
+      </figure>
+      <figure class="paper-figure">
+        <img src="static/img/concept_mapping.jpg" alt="Three ways to read a gripper off the hand on a tilted grasp: ours, top-down vertical, and a knuckle frame, each with LIBERO's robot replaying the demonstration." loading="lazy" width="1800" height="532">
+        <figcaption><b>The mapping must be 6-DoF.</b> Ours (a) reads the jaw axis from thumb to index and the approach from the wrist to the pinch at the onset of each grasp, then turns the gripper with the wrist; it replays all 2,000 demonstrations. A top-down gripper (b) replays 83.0% of them and none of three tasks with a drawer or the microwave; a knuckle frame recomputed every frame (c) replays 49.8%.</figcaption>
+      </figure>
+      <figure class="paper-figure">
+        <video class="figure-anim" src="static/videos/four_kinds.mp4" poster="static/videos/four_kinds.jpg" autoplay muted loop playsinline preload="metadata" aria-label="An egocentric demonstration beside a teleoperated one, showing the five ways they differ: a freer trajectory, a camera that moves with the head, a human arm in the image, no joint readings and no wrist camera."></video>
+        <figcaption><b>Five differences.</b> An egocentric demonstration differs from a teleoperated one in five ways: (1) the trajectory is freer, (2) the camera moves with the head, (3) the image shows a human arm, and there are (4) no joint readings and (5) no wrist camera. The four kinds of training data below separate the trajectory (1) from the robot's inputs (3 to 5).</figcaption>
+      </figure>
+      <figure class="paper-figure">
+        <img src="static/img/concept_datatypes.jpg" alt="Four kinds of training data: egocentric demonstration, its robot replay, a teleoperated demonstration, and the teleoperated trajectory in the human format." loading="lazy" width="1800" height="911">
+        <figcaption><b>Four kinds of training data.</b> Rows: the trajectory (human or teleoperated); columns: what the policy observes (the human format, or the robot's image, wrist camera and joint readings). With LIBERO's 50 teleoperated demonstrations per task, every egocentric demonstration yields all four.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section tint" id="dataset">
+  <div class="container">
+    <h2 class="section-title">Dataset</h2>
+    <p class="quote">One HDF5 file and one first-person video per demonstration, 2.1 GB in all, under CC BY 4.0. The full format is in the <a href="https://huggingface.co/datasets/LIBERO-Ego/LIBERO-Ego">dataset card</a>.</p>
+    <h3 class="sub-title">What is included</h3>
+    <ul class="checklist">
+      <li><i class="fa-solid fa-check"></i>The full simulator state of every frame, loadable into LIBERO's unmodified environment</li>
+      <li><i class="fa-solid fa-check"></i>The head pose and the 25 tracked joints of each hand, raw and aligned to the scene</li>
+      <li><i class="fa-solid fa-check"></i>The language instruction and LIBERO's BDDL task file</li>
+      <li><i class="fa-solid fa-check"></i>Per-task calibration: the operators' mean head pose and start pose</li>
+      <li><i class="fa-solid fa-check"></i>A robot replay that completes the task under one 6-DoF mapping</li>
+      <li><i class="fa-solid fa-check"></i>Renderable from the operator's head or any camera, as human or as robot data</li>
+    </ul>
+    <h3 class="sub-title">Download</h3>
+    <div class="download-grid">
+      <a class="download-card" href="https://huggingface.co/datasets/LIBERO-Ego/LIBERO-Ego/tree/main/demos/libero_spatial"><span class="dl-name">LIBERO-Spatial</span><span class="dl-meta">10 tasks, 500 demos, 423 MB</span><i class="fa-solid fa-download"></i></a>
+      <a class="download-card" href="https://huggingface.co/datasets/LIBERO-Ego/LIBERO-Ego/tree/main/demos/libero_object"><span class="dl-name">LIBERO-Object</span><span class="dl-meta">10 tasks, 500 demos, 460 MB</span><i class="fa-solid fa-download"></i></a>
+      <a class="download-card" href="https://huggingface.co/datasets/LIBERO-Ego/LIBERO-Ego/tree/main/demos/libero_goal"><span class="dl-name">LIBERO-Goal</span><span class="dl-meta">10 tasks, 500 demos, 469 MB</span><i class="fa-solid fa-download"></i></a>
+      <a class="download-card" href="https://huggingface.co/datasets/LIBERO-Ego/LIBERO-Ego/tree/main/demos/libero_10"><span class="dl-name">LIBERO-Long</span><span class="dl-meta">10 tasks, 500 demos, 755 MB</span><i class="fa-solid fa-download"></i></a>
+    </div>
+<pre class="code"><code>pip install -U huggingface_hub
+hf download LIBERO-Ego/LIBERO-Ego --repo-type dataset --local-dir data/LIBERO-Ego
+# or one suite only
+hf download LIBERO-Ego/LIBERO-Ego --repo-type dataset --local-dir data/LIBERO-Ego --include "demos/libero_object/*"</code></pre>
+  </div>
+</section>
+
+<section class="section dark" id="benchmark">
+  <div class="container">
+    <h2 class="section-title">Benchmark</h2>
+    <p class="quote">One policy is trained for all 40 tasks and evaluated in closed loop on LIBERO's unmodified robot, from LIBERO's 50 official initial states per task, over three evaluation seeds. The policy never sees simulator state.</p>
+    <h3 class="sub-title">Results in the paper</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Method</th><th>Spatial</th><th>Object</th><th>Goal</th><th>Long</th><th>Avg</th></tr></thead>
+        <tbody>
+          <tr><td>HumanEgo</td><td>69.9</td><td>45.5</td><td>30.3</td><td>9.2</td><td>38.7</td></tr>
+          <tr><td>Diffusion Policy</td><td>22.5</td><td>17.8</td><td>25.9</td><td>8.1</td><td>18.6</td></tr>
+          <tr><td>Phantom</td><td>25.1</td><td>11.1</td><td>16.9</td><td>2.9</td><td>14.0</td></tr>
+          <tr><td>EgoZero</td><td>53.6</td><td>66.6</td><td>49.2</td><td>21.0</td><td>47.6</td></tr>
+          <tr><td>&pi;<sub>0.5</sub></td><td>2.4</td><td>13.2</td><td>21.0</td><td>0.2</td><td>9.2</td></tr>
+          <tr class="ours"><td>Ours</td><td>96.6</td><td>86.5</td><td>70.3</td><td>43.7</td><td>74.3</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">Success (%) of one model for all 40 tasks trained on the 2,000 egocentric demonstrations only, with no robot teleoperation; mean over three evaluation seeds.</p>
+<p class="soon-note on-dark"><i class="fa-regular fa-clock"></i>Evaluation code coming soon.</p>
+  </div>
+</section>
+
+<section class="section light" id="findings">
+  <div class="container">
+    <h2 class="section-title">Findings</h2>
+    <p class="quote">What holds egocentric data back, what helps, and whether they can replace teleoperation. Every number is the four-suite average success of one policy for all 40 tasks.</p>
+    <div class="finding-list">
+      <article class="finding">
+        <div class="finding-media"><video src="static/videos/finding_trajectory.mp4" poster="static/videos/finding_trajectory.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The four kinds of training data with their success: changing the trajectory raises it by about 8 points, adding the robot's inputs by about 1."></video></div>
+        <div class="finding-text">
+          <p class="finding-kicker">What holds it back</p>
+          <h3>Teleoperation's advantage follows the trajectory</h3>
+          <p>Each trajectory, egocentric or teleoperated, is rendered in the human format and with the robot's inputs. Swapping in the teleoperated trajectory raises the average by 7.9 points in the human format and 7.8 with the robot's inputs; the robot's image, wrist camera and joint readings move it by only 1.0 and 0.9.</p>
+          <div class="finding-stats"><div class="is-key"><b>+7.9</b><span>teleoperated trajectory, human format</span></div><div><b>+1.0</b><span>robot's inputs, egocentric trajectory</span></div></div>
+        </div>
+      </article>
+      <article class="finding">
+        <div class="finding-media"><video src="static/videos/finding_speed.mp4" poster="static/videos/finding_speed.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Two filmstrips, the hand at human speed and slowed two times, with their success: 44.5% and 70.1%."></video></div>
+        <div class="finding-text">
+          <p class="finding-kicker">What helps: speed</p>
+          <h3>Bring the hand to the robot's speed</h3>
+          <p>The hand moves faster than the arm can track. Slowing the human trajectory two times, at equal optimizer steps, lifts the policy from 44.5% to 70.1% on the same episodes.</p>
+          <div class="finding-stats"><div><b>44.5%</b><span>trained at human speed</span></div><div class="is-key"><b>70.1%</b><span>trained slowed 2&times;</span></div></div>
+        </div>
+      </article>
+      <article class="finding">
+        <div class="finding-media"><video src="static/videos/finding_camera.mp4" poster="static/videos/finding_camera.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A fixed base camera beside a camera that moves to the predicted head pose, with their success: 70.1% and 74.4%."></video></div>
+        <div class="finding-text">
+          <p class="finding-kicker">What helps: a moving camera</p>
+          <h3>Let the camera move to the predicted head pose</h3>
+          <p>A camera that moves to the head pose the policy predicts gains 4.3 points over the fixed base camera, mostly on Object. A fixed camera at the task's mean head pose does not help (67.3%).</p>
+          <div class="finding-stats"><div><b>70.1%</b><span>fixed base camera</span></div><div class="is-key"><b>74.4%</b><span>moving to the predicted head pose</span></div></div>
+        </div>
+      </article>
+      <article class="finding">
+        <div class="finding-media"><video src="static/videos/finding_replace.mp4" poster="static/videos/finding_replace.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Bars of egocentric and teleoperated success: 84.5% and 84.3% on Spatial, Object and Goal; 43.7% and 79.3% on Long."></video></div>
+        <div class="finding-text">
+          <p class="finding-kicker">Can they replace teleoperation?</p>
+          <h3>Level on three suites, behind on Long</h3>
+          <p>With 50 demonstrations per task, egocentric data match teleoperated data over Spatial, Object and Goal. Long holds the whole difference.</p>
+          <div class="finding-stats"><div class="is-key"><b>84.5 / 84.3</b><span>egocentric / teleoperated (%), Spatial, Object, Goal</span></div><div><b>43.7 / 79.3</b><span>egocentric / teleoperated (%), Long</span></div></div>
+        </div>
+      </article>
+    </div>
+    <h3 class="sub-title">What this suggests</h3>
+    <ul class="suggest-grid">
+      <li><i class="fa-solid fa-hand"></i><span>Use egocentric data where they already match</span></li>
+      <li><i class="fa-solid fa-robot"></i><span>Spend teleoperation on long-horizon tasks</span></li>
+      <li><i class="fa-solid fa-route"></i><span>Make human trajectories executable before collecting more</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Code under the MIT license, data under CC BY 4.0. Tasks, scenes and robot from <a href="https://libero-project.github.io">LIBERO</a>.</p>
+</footer>
+
+<script src="static/js/site.js"></script>
+</body>
+</html>
